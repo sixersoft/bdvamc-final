@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-    Dashboard
+    User Role Permissions
 @endsection
 
 @push('after-css')
@@ -43,7 +43,7 @@
                             <div class="form-group">
                                 <label for="name">Role Name</label>
                                 <input type="text" class="form-control" id="name" value="{{ $role->name }}"
-                                    name="name" placeholder="Enter a Role Name">
+                                    name="name">
                             </div>
 
                             <div class="form-group">

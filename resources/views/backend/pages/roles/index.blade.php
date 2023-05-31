@@ -79,9 +79,10 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Sl</th>
-                                <th>Roles</th>
-                                <th class="text-center">Actions</th>
+                                <th width="5%">Sl</th>
+                                <th width="10%">Name</th>
+                                <th width="60%">Permissions</th>
+                                <th width="15%" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,6 +90,13 @@
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td>{{ $role->name }}</td>
+                                    <td>
+                                        @foreach ($role->permissions as $perm)
+                                            <span class="badge badge-info mr-1">
+                                                {{ $perm->name }}
+                                            </span>
+                                        @endforeach
+                                    </td>
                                     <td class="text-center">
                                         <a class="btn btn-success text-white"
                                             href="{{ route('roles.edit', $role->id) }}">Edit</a>
@@ -111,8 +119,9 @@
                         <tfoot>
                             <tr>
                                 <th>Sl</th>
-                                <th>Roles</th>
-                                <th class="text-center">Actions</th>
+                                <th>Name</th>
+                                <th>Permissions</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </tfoot>
                     </table>
