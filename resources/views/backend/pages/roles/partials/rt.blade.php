@@ -1,32 +1,5 @@
-@extends('backend.layouts.master')
-
-@section('title')
-    Create User Roles
-@endsection
-
-@push('after-css')
-@endpush
-
-@push('after-script')
-    @include('backend.pages.roles.partials.scripts')
-@endpush
-
-@section('pageheader')
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            <h1 class="m-0">Create Roles</h1>
-        </div><!-- /.col -->
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('roles.index') }}">Roles</a></li>
-                <li class="breadcrumb-item active">Create Roles</li>
-            </ol>
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-@endsection
-
-@section('content')
+<!-- page title area end -->
+<div class="main-content-inner">
     <div class="row">
         <!-- data table start -->
         <div class="col-12 mt-5">
@@ -35,7 +8,7 @@
                     <h4 class="header-title">Create New Role</h4>
                     @include('backend.layouts.partials.messages')
 
-                    <form action="{{ route('roles.store') }}" method="POST">
+                    <form action="{{ route('admin.roles.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="name">Role Name</label>
@@ -65,7 +38,7 @@
 
                                     <div class="col-9 role-{{ $i }}-management-checkbox">
                                         @php
-                                            $permissions = App\Models\User::getpermissionsByGroupName($group->name);
+                                            $permissions = App\User::getpermissionsByGroupName($group->name);
                                             $j = 1;
                                         @endphp
                                         @foreach ($permissions as $permission)
@@ -97,4 +70,4 @@
         <!-- data table end -->
 
     </div>
-@endsection
+</div>
