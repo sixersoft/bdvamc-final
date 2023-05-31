@@ -1,5 +1,15 @@
 @extends('backend.layouts.master')
 
+@section('title')
+    Dashboard
+@endsection
+
+@push('after-css')
+@endpush
+
+@push('after-script')
+@endpush
+
 @section('pageheader')
     <div class="row mb-2">
         <div class="col-sm-6">
