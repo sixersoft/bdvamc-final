@@ -27,8 +27,7 @@
     <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('backend/js/adminlte.min.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('backend/js/demo.js') }}"></script>
+
     <!-- Page specific script -->
     <script>
         $(function() {
@@ -69,11 +68,14 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+
                 <div class="card-header">
                     <h3 class="card-title">All User Role List</h3>
                 </div>
+
                 <!-- /.card-header -->
                 <div class="card-body">
+                    @include('backend.layouts.partials.messages')
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -88,7 +90,20 @@
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td>{{ $role->name }}</td>
                                     <td class="text-center">
-                                        -
+                                        <a class="btn btn-success text-white"
+                                            href="{{ route('roles.edit', $role->id) }}">Edit</a>
+
+                                        <a class="btn btn-danger text-white" href="{{ route('roles.destroy', $role->id) }}"
+                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $role->id }}').submit();">
+                                            Delete
+                                        </a>
+
+                                        <form id="delete-form-{{ $role->id }}"
+                                            action="{{ route('roles.destroy', $role->id) }}" method="POST"
+                                            style="display: none;">
+                                            @method('DELETE')
+                                            @csrf
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

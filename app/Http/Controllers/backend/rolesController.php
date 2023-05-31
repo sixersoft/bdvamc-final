@@ -24,9 +24,9 @@ class rolesController extends Controller
      */
     public function create()
     {
-        $permissions = Permission::all();
+        $all_permissions  = Permission::all();
         $permission_groups = User::getpermissionGroups();
-        return view('backend.pages.roles.create', compact('permissions', 'permission_groups'));
+        return view('backend.pages.roles.create', compact('all_permissions', 'permission_groups'));
     }
 
     /**
@@ -49,6 +49,10 @@ class rolesController extends Controller
             $role->syncPermissions($permissions);
         }
 
+        session()->flash(
+            'success',
+            'Role has been created !!'
+        );
         return back();
     }
 
@@ -63,24 +67,48 @@ class rolesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $role = Role::findById($id);
+        $all_permissions = Permission::all();
+        $permission_groups = User::getpermissionGroups();
+        return view('backend.pages.roles.edit', compact('role', 'all_permissions', 'permission_groups'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        // Validation Data
+        $request->validate([
+            'name' => 'required|max:100|unique:roles,name,' . $id
+        ], [
+            'name.requried' => 'Please give a role name'
+        ]);
+
+        $role = Role::findById($id);
+        $permissions = $request->input('permissions');
+
+        if (!empty($permissions)) {
+            $role->syncPermissions($permissions);
+        }
+
+        session()->flash('success', 'Role has been updated !!');
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $role = Role::findById($id);
+        if (!is_null($role)) {
+            $role->delete();
+        }
+
+        session()->flash('success', 'Role has been deleted !!');
+        return back();
     }
 }

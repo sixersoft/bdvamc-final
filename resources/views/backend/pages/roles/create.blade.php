@@ -14,7 +14,7 @@
 @section('pageheader')
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0">Create Roles</h1>
+            <h1 class="m-0">Role Permissions</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -29,7 +29,7 @@
 @section('content')
     <div class="row">
         <!-- data table start -->
-        <div class="col-12 mt-5">
+        <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">Create New Role</h4>
