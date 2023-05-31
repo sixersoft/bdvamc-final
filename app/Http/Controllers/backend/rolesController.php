@@ -41,8 +41,6 @@ class rolesController extends Controller
 
         // Process Data
         $role = Role::create(['name' => $request->name]);
-
-        // $role = DB::table('roles')->where('name', $request->name)->first();
         $permissions = $request->input('permissions');
 
         if (!empty($permissions)) {
