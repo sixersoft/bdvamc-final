@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\dashboardController;
+use App\Http\Controllers\backend\rolesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +26,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('wp-admin')->group(function () {
     Route::get('', [dashboardController::class, 'index'])->name('dashboard');
+    Route::resource('roles', rolesController::class);
 });
